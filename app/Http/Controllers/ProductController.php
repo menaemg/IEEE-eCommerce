@@ -68,16 +68,19 @@ class ProductController extends Controller
 
         $product = Product::find($id);
 
+        if ($request->path == null) {
+            $image = $product->path;
+        } else {
+            $image = $request->path->store('images', 'public');
+        }
+
         $product->update([
             'name'=> $request->name,
             'description'=> $request->description,
+            'path' => $image,
             'price'=> $request->price,
             'number_of'=> $request->number_of
         ]);
-
-        if ($request->path) {
-            $product->path = $request->path->store('images', 'public');
-        }
 
         $product->save;
 
