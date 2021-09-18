@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('app');
+    return redirect()->route('product.index');
 });
 
 
@@ -22,3 +22,7 @@ Route::get('user/edit/{id}', [ProductController::class,'edit']);
 Route::put('user/update/{id}', [ProductController::class,'update']);
 Route::delete('user/destroy/{id}', [ProductController::class,'destroy']);
 */
+
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
