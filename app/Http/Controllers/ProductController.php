@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
+
 class ProductController extends Controller
 {
 
     public function index()
     {
+        $data = Product::all();
+        return view('content')->with('data',$data);
     }
 
 
@@ -90,5 +93,8 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        Product::findorfail($id)->delete();
+        return  redirect()->route('product.index')->with('msg','Element is deleted successfully');
+
     }
 }
