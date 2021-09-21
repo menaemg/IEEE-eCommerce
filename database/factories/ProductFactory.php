@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 class ProductFactory extends Factory
 {
@@ -27,7 +28,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->Text(500),
             'price' => $this->faker->numberBetween(100 , 10000),
             'number_of' => $this->faker->numberBetween(0 , 1000),
-            'path' =>  "https://picsum.photos/200/300?random=" . rand(1,50)
+            'path' =>  "images/product.png"
         ];
     }
 }
