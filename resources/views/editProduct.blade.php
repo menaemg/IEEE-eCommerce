@@ -54,16 +54,7 @@
             max-width: 100%;
             max-height: 100%;
         }
-
-<<<<<<< Updated upstream
-=======
-        .btn-dashboard {
-            background-color: #2C3A47 ;
-            border-color: #f7ebab;
-            color: #f7ebab;
-        }
-
->>>>>>> Stashed changes
+        
     </style>
 @endsection
 
