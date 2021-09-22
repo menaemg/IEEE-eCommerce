@@ -58,6 +58,11 @@
             max-height: 100%;
         }
 
+        .back {
+
+            font-size: 18px;
+        }
+
     </style>
 @endsection
 
@@ -85,6 +90,7 @@
         </div>
     @endif
 
+    <a class="btn btn-primary back  " href="{{ route('product.index') }}" role="button"><i class="fas fa-long-arrow-alt-left"></i> Dashboard</a>
     <form action="{{route('product.update' , $product->id)}}" method="POST" class="container mt-5" enctype="multipart/form-data">
         @method('put')
         @csrf
