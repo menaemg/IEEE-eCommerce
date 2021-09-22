@@ -16,8 +16,11 @@
             background-color: rgba(44, 58, 71, 1);
             font-size: 42px;
         }
-        .btn {
+        .btn{
+            background-color: #2C3A47 ;
+            border-color: #f7ebab;
             color: #f7ebab;
+            font-size: 24px;
         }
         .btn:hover{
             background-color: #f7ebab ;
@@ -45,7 +48,6 @@
             color: #2C3A47;
             font-size: 18px;
         }
-
         .product-image{
             height: 200px;
             text-align: center;
@@ -54,12 +56,9 @@
             max-width: 100%;
             max-height: 100%;
         }
-        
         .back {
-
             font-size: 18px;
         }
-
     </style>
 @endsection
 
@@ -86,8 +85,8 @@
             {{Session::get('msg')}}
         </div>
     @endif
-    <a class="btn btn-primary back  " href="{{ route('product.index') }}" role="button"><i class="fas fa-long-arrow-alt-left"></i> Dashboard</a>
 
+    <a class="btn btn-primary back  " href="{{ route('product.index') }}" role="button"><i class="fas fa-long-arrow-alt-left"></i> Dashboard</a>
     <form action="{{route('product.update' , $product->id)}}" method="POST" class="container mt-5" enctype="multipart/form-data">
         @method('put')
         @csrf
