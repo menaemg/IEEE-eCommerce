@@ -48,6 +48,7 @@
             color: #2C3A47;
             font-size: 18px;
         }
+
         .product-image{
             height: 200px;
             text-align: center;
@@ -56,9 +57,12 @@
             max-width: 100%;
             max-height: 100%;
         }
+
         .back {
+
             font-size: 18px;
         }
+
     </style>
 @endsection
 
