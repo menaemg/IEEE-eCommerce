@@ -17,10 +17,7 @@
             font-size: 42px;
         }
         .btn{
-            background-color: #2C3A47 ;
-            border-color: #f7ebab;
             color: #f7ebab;
-            font-size: 24px;
         }
         .btn:hover{
             background-color: #f7ebab ;
@@ -58,9 +55,10 @@
             max-height: 100%;
         }
 
-        .back {
-
-            font-size: 18px;
+        .btn-dashboard {
+            background-color: #2C3A47 ;
+            border-color: #f7ebab;
+            color: #f7ebab;
         }
 
     </style>
@@ -90,7 +88,38 @@
         </div>
     @endif
 
-    <a class="btn btn-primary back  " href="{{ route('product.index') }}" role="button"><i class="fas fa-long-arrow-alt-left"></i> Dashboard</a>
+    <div class="d-flex justify-content-between m-1">
+        <div>
+            <a class="btn btn-primary btn-dashboard" href="{{ route('product.index') }}" role="button"><i class="fas fa-long-arrow-alt-left"></i> Dashboard</a>
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="far fa-trash-alt"></i> Delete
+            </button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>are you sure to delete this product ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form action="{{route('product.destroy',$product->id)}}"  method="POST" class="form-delete">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <form action="{{route('product.update' , $product->id)}}" method="POST" class="container mt-5" enctype="multipart/form-data">
         @method('put')
         @csrf
