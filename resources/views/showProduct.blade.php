@@ -16,7 +16,7 @@
             background-color: rgba(44, 58, 71, 1);
             font-size: 42px;
         }
-        .btn{
+        .btn {
             color: #f7ebab;
         }
         .btn:hover{
@@ -36,16 +36,6 @@
             box-shadow: 5px 5px 5px -5px #f7ebab;
             border-color: #f7ebab;
         }
-        .alert-success{
-            color: #2C3A47;
-            font-size: 18px;
-            background-color:#ffed85;
-        }
-        .alert-danger{
-            color: #2C3A47;
-            font-size: 18px;
-        }
-
         .product-image{
             height: 200px;
             text-align: center;
@@ -70,29 +60,14 @@
 @section('content')
 
 
-    <h2 class="text-center p-3 heading mb-0">Edit product</h2>
-
-    @if ($errors->any())
-        <div class="alert alert-danger mt-0 pb-1">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    @if (Session::has('msg'))
-        <div class="alert alert-success mt-0 pb-3" role="alert">
-            {{Session::get('msg')}}
-        </div>
-    @endif
+    <h2 class="text-center p-3 heading mb-0">Show product</h2>
 
     <div class="d-flex justify-content-between m-1">
         <div>
             <a class="btn btn-primary btn-dashboard" href="{{ route('product.index') }}" role="button"><i class="fas fa-long-arrow-alt-left"></i> Dashboard</a>
         </div>
         <div>
+            <a class="btn btn-success" href="{{ route('product.edit' , $product->id) }}" role="button"><i class="far fa-edit"></i> Edit</a>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="far fa-trash-alt"></i> Delete
             </button>
@@ -120,9 +95,8 @@
             </div>
         </div>
     </div>
-    <form action="{{route('product.update' , $product->id)}}" method="POST" class="container mt-5" enctype="multipart/form-data">
-        @method('put')
-        @csrf
+
+    <form class="container mt-5" enctype="multipart/form-data">
 
         <div class="product-image mb-2">
             <img src="{{ asset('storage/' . $product->path) }}" alt="{{ $product->name . " image" }}">
@@ -130,27 +104,21 @@
 
         <div class="mb-4">
             <label for="name" class="form-label lead">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}">
+            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}" readonly>
         </div>
         <div class="form-floating mb-4">
-            <textarea class="form-control" placeholder="Leave a comment here" name="description" id="textarea" style="height: 100px">{{ $product->description }}</textarea>
+            <textarea class="form-control" placeholder="Leave a comment here" name="description" id="textarea" style="height: 100px" readonly>{{ $product->description }}</textarea>
             <label for="textarea" class="form-label">Description</label>
-        </div>
-
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="path">Change image</label>
-            <input type="file" class="form-control" id="path" name="path">
         </div>
 
         <div class="mb-4">
             <label for="price" class="form-label lead">Price</label>
-            <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
+            <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}" readonly>
         </div>
         <div class="mb-4">
             <label for="number" class="form-label lead">Number of Pieces</label>
-            <input type="text" class="form-control" id="number" name="number_of" value="{{ $product->number_of }}">
+            <input type="text" class="form-control" id="number" name="number_of" value="{{ $product->number_of }}" readonly>
         </div>
 
-        <button type="submit" class="btn py-1 w-100">Submit</button>
     </form>
 @endsection
