@@ -31,6 +31,14 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:3|max:255',
+            'description' => 'required|min:3|max:1000',
+            'path' => 'nullable',
+            'price' => 'required|numeric',
+            'number_of' => 'required|numeric',
+        ]);
+
         Product::create(
             [
                 'name'=> $request->name,
@@ -95,6 +103,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+
         Product::findorfail($id)->delete();
         return  redirect()->route('product.index')->with('msg','Element is deleted successfully');
 

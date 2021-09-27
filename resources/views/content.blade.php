@@ -38,7 +38,8 @@
             width: 75px;
             color: black;
         }
-        .btn-danger{
+        .btn-danger
+        {
             background-color: #adc2c9;
             text-align: center;
             font-size: 16px;
@@ -69,6 +70,7 @@
             border: 2px solid #ffe6e6;
             background-color:#ffe6e6;
         }
+
         .btn-info:hover,.btn-danger:hover,.btn-light:hover,.btn-primary:hover {
             background-color: #2C3A47;
             border: 2px solid #2C3A47;
@@ -101,6 +103,12 @@
         }
 
     </style>
+  <script>
+      $('#confirm-delete').on('show.bs.modal', function(e) {
+          $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+      });
+
+  </script>
 @endsection
 
 @section('content')
@@ -136,11 +144,13 @@
                     <td>
 
                         <a href="{{route('product.edit',$element->id)}}" class="btn btn-light">Edit</a>
-                        <form action="{{route('product.destroy',$element->id)}}"  method="POST" class="form-delete">
+
+                        <form action="{{route('product.destroy',$element->id)}}"  method="POST" class="form-delete" data-target="#confirm-delete">
                             @csrf
                             @method('DELETE')
                             <button  type="submit" class="btn btn-danger" >Delete </button>
                         </form>
+
                         <form action="{{route('product.show',$element->id)}}"  method="POST" class="form-show">
                             @csrf
                             @method('GET')
