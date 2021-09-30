@@ -71,7 +71,8 @@
             background-color:#ffe6e6;
         }
 
-        .btn-info:hover,.btn-danger:hover,.btn-light:hover,.btn-primary:hover {
+        .btn-info:hover,.btn-danger:hover,.btn-light:hover,.btn-primary:hover,.btn-primary:active,.btn-danger:focus {
+            box-shadow: 5px 5px 5px -5px #2C3A47;
             background-color: #2C3A47;
             border: 2px solid #2C3A47;
             font-weight: bolder;
@@ -103,12 +104,11 @@
         }
 
     </style>
-  <script>
-      $('#confirm-delete').on('show.bs.modal', function(e) {
-          $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-      });
 
-  </script>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 @endsection
 
 @section('content')
@@ -145,11 +145,38 @@
 
                         <a href="{{route('product.edit',$element->id)}}" class="btn btn-light">Edit</a>
 
-                        <form action="{{route('product.destroy',$element->id)}}"  method="POST" class="form-delete" data-target="#confirm-delete">
-                            @csrf
-                            @method('DELETE')
-                            <button  type="submit" class="btn btn-danger" >Delete </button>
-                        </form>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">!!!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="true">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Do you really want to delete these element?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{route('product.index')}}"  method="POST" class="form-show">
+                                        <button type="button" class="btn btn-danger" style="background-color: gray"  data-dismiss="modal">Close</button>
+                                        </form>
+                                        <form action="{{route('product.destroy',$element->id)}}"  method="POST" class="form-delete">
+                                            @csrf
+                                            @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" >Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <form action="{{route('product.show',$element->id)}}"  method="POST" class="form-show">
                             @csrf
